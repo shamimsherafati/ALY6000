@@ -1,0 +1,561 @@
+---
+title: "Executive Summary Report 3"
+output: html_notebook
+
+---
+
+# Shamim Sherafati
+### 2022-10-11
+## Module 3 - Project
+
+---
+# Abstract
+The Report that follows is based on ALY 6000 Module 3. This is authentic work that Miss. Shamim Sherafati completed for the assignment ALY 6000: Introduction to Analytics, and she is submitting it on time, before the decided date and time.
+
+
+
+1. Print your name at the top of the script and load these libraries: FSA, FSAdata, magrittr,
+dplyr, tidyr plyr and tidyverse.
+
+Describe number 1: First, We should loading the libraries and recording our names.
+
+```{r}
+name <- ("Shamim Sherafati")
+print(name)
+install.packages("FSA")
+install.packages("FSAdata")
+install.packages("magrittr")
+install.packages("plyr")
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("tidyverse")
+```
++1. Call library
+
+```{r}
+library(FSA)
+library(FSAdata)
+library(magrittr)
+library(plyr)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+```
+
+2. Import the inchBio.csv and name the table <bio> .
+
+Describe number 2: To begin analysing and processing the data, we should load the dataset in this stage.
+
+```{r}
+bio <- read.table (file="~/Documents/ALY 6000/Module 3/inchBio.csv", header= TRUE, sep=",", stringsAsFactors = FALSE)
+bio
+```
+
+3. Display the head, tail and structure of <bio> .
+
+Describe number 3: Since it has been requested that we utilise the variable "bio" for the dataset, we will proceed as follows. Additionally, by using the head and tail function, we may examine the dataset's beginning and last values in the following ways. Also, with structure function, we can find the data.frame values like: netID, fishID, species, tl and etc. and also it gives information about their numbers, too.
+
+```{r}
+head(bio)
+tail(bio)
+str(bio)
+```
+
+4. Create an object, <counts>, that counts and lists all the species records .
+
+Describe number 4 : This demonstrates and confirms that there are 676 values in the Species column, which might be extremely helpful for the analysis.
+
+```{r}
+counts <- c(bio$species)
+counts
+```
+
+5. Display just the 8 levels (names) of the species .
+
+Describe number 5 :  The Species column contains 8 different categories, as seen by the code below. 
+Let's check the unique values in the species column. We can discover that from the following.
+
+```{r}
+Level8th <- unique(bio$species)
+Level8th
+```
+
+6. Create a <tmp> object that displays the different species and the number of record of
+each species in the dataset. Include this information in your report.
+
+Describe number 6 : We can use the table() method to generate results in order to get the count of all the various rows in the 8 distinct types of Species variables. As a result, they are 8 different species with their number of records which can be seen in the following result. For example, Tadpole Madtom with 6 records has the lowest number of score. While, Largemouth Bass and Bluegill have the highest number of records with 228 and 220 respecrively records.
+
+```{r}
+tmp <- table (bio$species)
+tmp
+```
+
+7. Create a subset, <tmp2>, of just the species variable and display the first five records .
+
+Describe number 7 : In this stage, I created <tmp2> which will show the the species variable and with using the head function, I show the first five records of dataset.
+
+```{r}
+tmp2 <- subset(bio, select = species)
+tmp2
+
+head(tmp2, 5)
+```
+
+8. Create a table, <w>, of the species variable. Display the class of w .
+
+Describe number 8 : Next, I created a table <w> of those species variable and used the class function to be sure that its table.
+
+```{r}
+w <- table (bio$species)
+w
+
+class(w)
+```
+
+9. Convert <w> to a data frame named <t> and display the results .
+
+Describe number 9: After that, I want to know the frequency of the values, and to achieve so, I'll convert it into a Data Frame and called it <t> .
+
+```{r}
+t <- as.data.frame(w)
+t
+class(t)
+```
+
+10. Extract and display the frequency values from the <t> data frame .
+
+Describe number 10: In this step, by using t$Freq  show the frequency value which I convert it into a Data Frame which called <t> .
+
+```{r}
+t$Freq
+```
+
+11. Create a table named <cSpec> from the bio species attribute (variable) and confirm that
+you created a table which displays the number of species in the dataset <bio> .
+
+Describe number 11: Next, if we want to figure out what percentage does every Specie hold in the dataset then we can do it using the percentage function.Since there are 676 species in total, the dataset <bio> will provide us with an estimate of the number of species, therefore we create a table called cSpec>.
+
+```{r}
+cSpec <- table(bio$species)
+cSpec
+
+class(cSpec)
+```
+
+12. Create a table named <cSpecPct> that displays the species and percentage of records for
+each species. Confirm you created a table class.
+
+Describe number 12: By dividing each species by 676 and multiply 100, we can obtain an estimation and percentage of the species proportion.
+
+```{r}
+cSpecPct <- table(bio$species)/676* 100
+cSpecPct
+class(cSpecPct)
+```
+
+13. Convert the table, <cSpecPct>, to a data frame named <u> and confirm that <u> is a data
+frame.
+
+Describe number 13: In this dataset, we can use the following way to view and analyze the relative frequencies of the various values.
+
+```{r}
+u <- as.data.frame(cSpecPct) 
+u
+class(u)
+```
+
+14. Create a barplot of <cSpec> with the following: titled Fish Count with the following
+specifications:
+• Title: Fish Count
+• Y axis is labeled “COUNTS”
+• Color the bars Light Green
+• Rotate Y axis to be horizontal
+• Set the X axis font magnification to 60% of nominal
+
+Describe number 14: The Bar Plot above illustrate the fish count of each fish available.The species of the fishare labelled on the X-axis and the count (number) of the fish are labelled on the Y axis, respectively. The Y axis has a range of 0 to 200. This Barplot's title is "Fish Count." with Light Green colour which are shown and also, Font magnification has been maintained at 60% of the normal font size. 
+Moreover, the following graph shows that there are more Largemouth bass than any other species of fish. 
+Similarly, Bluegill has the second-highest fish count overall. The number of fish for both largemouth bass and bluegill is over 200. With a combined total of 676 fish and more than 200 fish each, the largemouth bass and bluegill take up around 66% of the whole lot. 
+The average count of the Bluntnose Winnow stands between the species with the greatest and lowest lot. 
+In comparison to largemouth bass and bluegill, the proportions of the species Black Crappie, Iowa darter, Pumpkinseed, Tadpole Madtom, and Yellow Perch are quite low. 
+Compared to all other species, Tadpole Madtom has the fewest fish.
+
+```{r}
+barplot(cSpec, main = "Fish Count",
+ylab = "COUNTS",
+col = "LightGreen",
+las=2,
+cex.names = 0.6,
+cex.lab=1)
+```
+
+15. Create a barplot of <cSpecPct>, with the following specifications:
+• Y axis limits of 0 to 4
+• Y axis label color of Light Blue
+• Title of “Fish Relative Frequency”
+
+Describe number 15: The Bar Plot above shows the Fish Relative frequency of each fish available. This fish relative frequency is calculated by dividing each frequency of the fish by the total number of fish available as sample. 
+As can be seen from the plot, The Y-axis depicts the 8 different species of fish available. The x-axis
+depicts the relative frequency scale which has a limit od 0 to 4 and as can be seen which it shows that this scale is from 0.0, 0.1, 0.2, 0.3 and 0.4. As we can observe Bluegill and LargemouthBass are the
+most abundant fish found wich are a above 0.3. After these two fishes, Bluentnose Minnow came next with 0.15. Tadpole Madtom and Pumpkinseed have the lowest fish frequency among the lot which are slightly above 0.0.
+This bar plot is actually the same as the Fish Count plot with a difference in x-axis that shows the relative frequency scale and compare them in frequency scale.
+
+```{r}
+barplot((cSpecPct/100),ylim =c(0,0.4), col.axis = "LightBlue", las=2, main = "Fish Relative
+Frequency") 
+```
+
+16. Rearrange the <u> cSpec Pct data frame in descending order of relative frequency. Save
+the rearranged data frame as the object <d> .
+
+Describe number 16: The following code can be used to arranging the relative frequency.
+
+```{r}
+d <- u[with(u, order(-Freq)),]
+d
+```
+
+17. Rename the <d> columns Var1 to Species, and Freq to RelFreq .
+
+```{r}
+names(d) <- c("Species", "RelFreq")
+d
+```
+
+18. Add new variables to <d> and call them cumfreq, counts, and cumcounts.
+
+
+```{r}
+d <- transform(d, cumfreq = cumsum(RelFreq))
+d
+
+dcount <- as.data.frame(t[order(-t$Freq),])
+
+d <- transform(d, counts=RelFreq*676)
+d
+
+d <- transform(d, cumcounts=cumsum(counts))
+d
+```
+
+19. Create a parameter variable <def_par> to store parameter variables .
+
+
+```{r}
+def_par <- par(mar = c(10,5,5,8))
+def_par
+```
+20. Create a barplot, <pc>, with the following specifications:
+• d$counts of width 1, spacing of .15
+• no boarder
+• Axes: F
+• Yaxis limit 0,3.05*max
+• d$counts na.rm is true
+• y label is Cummulative Counts
+• scale x axis to 70%
+• names.arg: d$Species
+• Title of the barplot is “Species Pareto”
+• las: 2)
+
+Describe number 20: The bar chart below shows 8 different species fishes. As can be seen from the chart, the Y-axis shows Cumulative Counts and the X-axis shows these 8 different species fishes which as it is obvious Largemouth Bass and Bluegill experience the significant highest proporotion while, Pumkinseed and Tadpole Madtom has the lowest one.
+
+```{r}
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Species Pareto', las = 2)
+```
+
+21. Add a cumulative counts line to the <pc> plot with the following:
+• Spec line type is b
+• Scale plotting text at 70%
+• Data values are solid circles with color cyan4
+
+Describe number 21: In this bar chart which is just the same as the bar plot in question 20 (plot "pc") with one difference; we added a cumulative counts line which shows the sum of all the percentage values up to that category and as the Largemouth Bass to Bluntnose Minnow has the same amount, so this cumulative counts increased twice at first.
+
+```{r}
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Species Pareto', las = 2)
+lines.default (pc, d$cumcounts, type = 'b', pch = 19, col = "cyan4")
+```
+
+22. Place a grey box around the pareto plot .
+
+Describe number 22: In this bar plot, just like the previous plot which has the same trend with only difference which we added a  box into it.
+
+```{r}
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Species Pareto', las = 2)
+lines.default (pc, d$cumcounts, type = 'b', pch = 19, col = "cyan4")
+
+box(col = 'grey62')
+```
+
+23. Add a left side axis with the following specifications
+• Horizontal values at tick marks at cumcounts on side 2
+• Tickmark color of grey62
+• Color of axis is grey62
+• Axis scaled to 80% of normal
+
+Describe number 23: In this question, we continue the previous trend of "pc" bar chart, however we added Horizontal values in left side of the box. So now as can be observed from the chart, we can analyse it more accuraetly; Largemouth Bass which it is 22800 and Bluegill which is approximately 22800 have the highest amount in comare with other type of fishes. But, Tadpole Madtom and Pumkinseed have the lowest amount which are just above 0.
+
+```{r}
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Species Pareto', las = 2)
+lines.default (pc, d$cumcounts, type = 'b', pch = 19, col = "cyan4")
+box(col = 'grey62')
+
+axis(side = 2, las = 2, at = c(0, d$cumcounts), tick = TRUE, line = NA, col.ticks = "grey62", col =
+"grey62", cex.axis=0.8 )
+```
+
+24. Add axis details on right side of box with the specifications:
+• Spec: Side 4
+• Tickmarks at cumcounts with labels from 0 to cumfreq with %,
+• Axis color of cyan5 and label color of cyan4
+• Axis font scaled to 80% of nominal
+
+Describe number 24: An example of a Pareto analysis is shown in the above bar graph. The findings are shown in descending order on the species Pareto chart, with the biggest bar starting on the left and the smallest bar being farthest on the right. We learn about the number of fish on the Y-axis and the eight different species on the X-axis in this plot that we want to analyse. The cumulative frequency of the species is represented by the blue dots and the cumulative frequency in percentage is shown by the right axis. This demonstrates the low cumulative frequency and low population size of the species on the right.
+The first blue dot is displayed at 33–34% because the largemouth bass takes up around 33% of the entire lot. 
+The number of fish keeps growing as we move to the right, and the blue dots will update to show you a new proportion of the overall fish population. 
+By the time the last specie is complete, we will have practically all of the fishes present, making the total number of fish 676.
+Also, analysing them with the measures of cumulative counts depicts that Largemouth Bass and Bluegill has approximately the same amount which is 22800 and Tadpole Madton with almost above 0 has the less amount as a Cumulative Counts. 
+
+```{r}
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Species Pareto', las = 2)
+lines.default (pc, d$cumcounts, type = 'b', pch = 19, col = "cyan4")
+box(col = 'grey62')
+axis(side = 2, las = 2, at = c(0, d$cumcounts), tick = TRUE, line = NA, col.ticks = "grey62", col =
+"grey62")
+
+axis(side = 4, at = c(0, d$cumcounts), col = "cyan2", cex.axis = 0.8, las = 2, tick = TRUE,
+line = NA, col.axis = "dark cyan", labels = paste0(round( c(0,d$cumfreq) * 100,digits = 0),'%'))
+```
+
+25. Display the finished Species Pareto Plot (without the star watermarks). Have your last
+name on the plot
+
+```{r}
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Sherafati', las = 2)
+lines.default (pc, d$cumcounts, type = 'b', pch = 19, col = "cyan4")
+box(col = 'grey62')
+axis(side = 2, las = 2, at = c(0, d$cumcounts), tick = TRUE, line = NA, col.ticks = "grey62", col =
+"grey62")
+
+axis(side = 4, at = c(0, d$cumcounts), col = "cyan2", cex.axis = 0.8, las = 2, tick = TRUE,
+line = NA, col.axis = "dark cyan", labels = paste0(round( c(0,d$cumfreq) * 100,digits = 0),'%'))
+```
+
+
+# SUMMARY
+To sum up,  We can see from the data file inchBio.csv that there are a total of 7 data variables with 676 data objects, 8 levels of distinct species on which we are doing our descriptive analysis, and a total of 7 data variables. Largemouth bass, with a count strength of 288, is the species with the highest count strength, while Tadpole Madtom, with a count strength of 6, has the lowest. The highest for tadpole has a cumulative count of 676, whereas the largest largemouth bass has a cumulative count of 288, and the smallest tadpole has a relative frequency of 0.00. However, Tadepole Madtom's cumulative frequency, which is 100, may be the greatest.
+Additionally, I learned how to calculate the descriptive statistics of the dataset and how to utilise the results to infer information and make assumptions and decisions about it. 
+The Pareto and Barplot charts made the analysis super interesting and offered a lot of visual insights into the dataset. 
+
+
+
+# BIBLIOGRAPHY
+
+geeksforgeeks.com
+
+Tutorialspoint.com
+
+Youtube.com
+
+Stackoverflow.com
+
+R in Action by R. Kabacoff
+
+# APPENDIX
+
+name <- ("Shamim Sherafati")
+
+print(name)
+
+install.packages("FSA")
+
+install.packages("FSAdata")
+
+install.packages("magrittr")
+
+install.packages("dplyr")
+
+install.packages("tidyr")
+
+install.packages("plyr")
+
+install.packages("tidyverse")
+
+library(FSA)
+
+library(FSAdata)
+
+library(magrittr)
+
+library(dplyr)
+
+library(tidyr)
+
+library(plyr)
+
+
+library(tidyverse)
+
+bio <- read.table (file="~/Documents/ALY 6000/Module 3/inchBio.csv", header= TRUE, sep=",", stringsAsFactors = FALSE)
+
+bio
+
+head(bio)
+
+tail(bio)
+
+str(bio)
+
+counts <- c(bio$species)
+
+counts
+
+Level8th <- unique(bio$species)
+
+Level8th
+
+tmp <- table (bio$species)
+
+tmp
+
+tmp2 <- subset(bio, select = species)
+
+tmp2
+
+head(tmp2, 5)
+
+w <- table (bio$species)
+
+w
+
+class(w) 
+
+t <- as.data.frame(w)
+
+t
+
+class(t)
+
+t$Freq
+
+cSpec <- table(bio$species)
+
+cSpec
+
+class(cSpec)
+
+cSpecPct <- table(bio$species)/676* 100
+
+cSpecPct
+
+class(cSpecPct)
+
+u <- as.data.frame(cSpecPct) 
+
+u
+
+class(u)
+
+barplot(cSpec, main = "Fish Count", ylab = "COUNTS", col = "LightGreen", las=2, cex.names = 0.6, cex.lab=1)
+
+barplot((cSpecPct/100),ylim =c(0,0.4), col.axis = "LightBlue", las=2, main = "Fish Relative
+Frequency")
+
+d <- u[with(u, order(-Freq)),]
+
+d
+
+names(d) <- c("Species", "RelFreq")
+
+d
+
+d <- transform(d, cumfreq = cumsum(RelFreq))
+
+d
+
+dcount <- as.data.frame(t[order(-t$Freq),])
+
+
+d <- transform(d, counts=RelFreq*676)
+
+d
+
+d <- transform(d, cumcounts=cumsum(counts))
+
+d
+
+def_par <- par(mar = c(10,5,5,8))
+
+def_par
+
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Species Pareto', las = 2)
+
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Species Pareto', las = 2)
+lines.default (pc, d$cumcounts, type = 'b', pch = 19, col = "cyan4")
+
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Species Pareto', las = 2)
+lines.default (pc, d$cumcounts, type = 'b', pch = 19, col = "cyan4")
+
+box(col = 'grey62')
+
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Species Pareto', las = 2)
+lines.default (pc, d$cumcounts, type = 'b', pch = 19, col = "cyan4")
+box(col = 'grey62')
+
+axis(side = 2, las = 2, at = c(0, d$cumcounts), tick = TRUE, line = NA, col.ticks = "grey62", col =
+"grey62", cex.axis=0.8 )
+
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Species Pareto', las = 2)
+lines.default (pc, d$cumcounts, type = 'b', pch = 19, col = "cyan4")
+box(col = 'grey62')
+axis(side = 2, las = 2, at = c(0, d$cumcounts), tick = TRUE, line = NA, col.ticks = "grey62", col =
+"grey62")
+
+axis(side = 4, at = c(0, d$cumcounts), col = "cyan2", cex.axis = 0.8, las = 2, tick = TRUE,
+line = NA, col.axis = "dark cyan", labels = paste0(round( c(0,d$cumfreq) * 100,digits = 0),'%'))
+
+
+pc <- barplot(d$count, width = 1, space = 0.15, border = NA, axes = F, ylim = c(0, 3.05 * max(d$count, na.rm = TRUE)), ylab = 'Cumulative Counts', cex.axis = 0.7, names.arg = d$Species, main = 'Sherafati', las = 2)
+lines.default (pc, d$cumcounts, type = 'b', pch = 19, col = "cyan4")
+box(col = 'grey62')
+axis(side = 2, las = 2, at = c(0, d$cumcounts), tick = TRUE, line = NA, col.ticks = "grey62", col =
+"grey62")
+
+axis(side = 4, at = c(0, d$cumcounts), col = "cyan2", cex.axis = 0.8, las = 2, tick = TRUE,
+line = NA, col.axis = "dark cyan", labels = paste0(round( c(0,d$cumfreq) * 100,digits = 0),'%'))
+
+
+
+
+
+
+. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
